@@ -15,8 +15,8 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form extends Mage_Adminhtm
             )
         );
 
-        if (Mage::registry('stuntcoders_data')) {
-            $data = Mage::registry('stuntcoders_data')->getData();
+        if (Mage::registry('stuntcoders_slideshow')) {
+            $data = Mage::registry('stuntcoders_slideshow')->getData();
         } else {
             $data = array();
         }

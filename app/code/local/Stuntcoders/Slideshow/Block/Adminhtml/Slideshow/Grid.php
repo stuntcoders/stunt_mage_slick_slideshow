@@ -63,7 +63,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtm
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/add', array('id' => $row->getId()));
     }
 
 }

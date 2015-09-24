@@ -11,19 +11,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
     public function addAction()
     {
         if ($this->getRequest()->getParam('id')) {
-            Mage::register('slideshow_data',
-                Mage::getModel('stuntcoders_slideshow/slideshow')->load($this->getRequest()->getParam('id'))
-            );
-        }
-
-        $this->loadLayout();
-        $this->renderLayout();
-    }
-
-    public function editAction()
-    {
-        if ($this->getRequest()->getParam('id')) {
-            Mage::register('slideshow_data',
+            Mage::register('stuntcoders_slideshow',
                 Mage::getModel('stuntcoders_slideshow/slideshow')->load($this->getRequest()->getParam('id'))
             );
         }
