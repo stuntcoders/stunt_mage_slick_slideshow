@@ -38,7 +38,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Edit extends Mage_Adminhtml_Block_Wi
             $this->getLayout()->createBlock('adminhtml/widget_button')
                 ->setData(array(
                     'label'     =>  Mage::helper('stuntcoders_slideshow')->__('Save Slideshow'),
-                    'onclick'   => "stuntcoders_slideshow.submit()",
+                    'onclick'   => 'stuntcoders_slideshow.submit()',
                     'class'   => 'add'
                 ))
         );

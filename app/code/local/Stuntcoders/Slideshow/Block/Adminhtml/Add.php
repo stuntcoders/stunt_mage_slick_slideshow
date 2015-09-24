@@ -23,7 +23,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Add extends Mage_Adminhtml_Block_Wid
         $this->setChild('form', $this->getLayout()->createBlock('stuntcoders_slideshow/adminhtml_slideshow_form'));
     }
 
-    public function getAddNewButtonHtml()
+    public function getSaveButtonHtml()
     {
         return $this->getChildHtml('save_button');
     }

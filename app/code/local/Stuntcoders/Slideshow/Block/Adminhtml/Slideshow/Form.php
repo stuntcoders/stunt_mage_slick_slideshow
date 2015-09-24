@@ -25,19 +25,27 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form extends Mage_Adminhtm
             'legend' => Mage::helper('stuntcoders_slideshow')->__('Slideshow Information')
         ));
 
-        $fieldset->addField('code', 'text', array(
-            'label' => Mage::helper('stuntcoders_slideshow')->__('Code'),
-            'name' => 'code',
-        ));
-
         $fieldset->addField('name', 'text', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Name'),
             'name' => 'name',
         ));
 
+        $fieldset->addField('code', 'text', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Code'),
+            'name' => 'code',
+        ));
+
+        $fieldset->addField('is_enabled', 'select', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Enabled'),
+            'name' => 'is_enabled',
+            'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray()
+        ));
+
+        $fieldset->addField('config', 'hidden', array('name' => 'config'));
+
         $fieldset->addField('image', 'image', array(
-            'label' => Mage::helper('stuntcoders_slideshow')->__('Image'),
-            'name' => 'image[]',
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Images'),
+            'name' => 'images[]',
             'multiple'  => 'multiple',
             'mulitple'  => true,
         ));

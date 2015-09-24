@@ -45,31 +45,20 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
             $slideshowModel = Mage::getModel('stuntcoders_slideshow/slideshow');
             $slideshowModel->setName($postData['name'])
                 ->setCode($postData['code'])
-                ->setIsEnabled($postData['status'])
-                ->setJsonString(preg_replace('/\s+/', ' ', $postData['jsonObject']));
+                ->setIsEnabled($postData['is_enabled'])
+                ->setConfig(trim($postData['config']));
+
             if ($this->getRequest()->getParam('id')) {
                 $slideshowModel->setId($this->getRequest()->getParam('id'));
             }
 
             $slideshowModel->save();
-            if (isset($postData['editImages'])) {
-                $images = json_decode($postData['editImages']);
-                foreach ($images as $image) {
-                    $imageModel = Mage::getModel('stuntcoders_slideshow/slideshow_image')->load($image->id);
-                    if ($image->delete) {
-                        $imageModel->delete();
-                    }
-                    $image->status ? $imageModel->setIsEnabled(1) : $imageModel->setIsEnabled(0);
-                    $imageModel->save();
-                }
-            }
 
-            $images = $this->_uploadImage();
+            $images = $this->_uploadImages();
             if (!empty($images)) {
                 foreach ($images as $image) {
                     Mage::getModel('stuntcoders_slideshow/slideshow_image')
-                        ->setImage($image)
-                        ->setSlideshowId($slideshowModel->getId())
+                        ->setImage($image)->setSlideshowId($slideshowModel->getId())
                         ->setIsEnabled(1)
                         ->save();
                 }
@@ -79,7 +68,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
                 Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));
         } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('stuntcoders_slideshow')->__('Slideshow could not be saved'));
+                Mage::helper('stuntcoders_slideshow')->__($e->getMessage()));
         }
 
         $this->_redirect('*/*/index');
@@ -134,33 +123,29 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
         $this->_redirect('*/*/index');
     }
 
-    private function _uploadImage()
+    private function _uploadImages()
     {
-        if (!isset($_FILES['image']['name'])) {
+        if (!isset($_FILES['images']['name'])) {
             return false;
         }
 
         $names = array();
-        $path = Mage::getBaseDir('media') . DS . 'slideshow' . DS;
-        if (!file_exists($path)) {
-            mkdir($path, 0755, true);
-        }
-
-        foreach ($_FILES['image']['name'] as $key => $image) {
+        $path = Mage::helper('stuntcoders_slideshow')->getImageSavePath();
+        foreach ($_FILES['images']['name'] as $key => $image) {
             try {
-                $uploader = new Varien_File_Uploader(
-                    array(
-                        'name' => $_FILES['image']['name'][$key],
-                        'type' => $_FILES['image']['type'][$key],
-                        'tmp_name' => $_FILES['image']['tmp_name'][$key],
-                        'error' => $_FILES['image']['error'][$key],
-                        'size' => $_FILES['image']['size'][$key]
-                    )
-                );
+                $uploader = new Varien_File_Uploader(array(
+                    'name' => $_FILES['images']['name'][$key],
+                    'type' => $_FILES['images']['type'][$key],
+                    'tmp_name' => $_FILES['images']['tmp_name'][$key],
+                    'error' => $_FILES['images']['error'][$key],
+                    'size' => $_FILES['images']['size'][$key]
+                ));
+
                 $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
                 $imageName = $uploader->getCorrectFileName($_FILES['image']['name'][$key]);
+
                 $uploader->save($path, $imageName);
-                $names[] = 'slideshow/' . $imageName;
+                $names[] = $imageName;
 
             } catch (Exception $e) {
                 Mage::logException($e);
