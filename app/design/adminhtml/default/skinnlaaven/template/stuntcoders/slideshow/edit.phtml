@@ -1,0 +1,235 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;">
+                <h3 class="icon-head head-blog">
+                    <?php echo Mage::helper('adminhtml')->__('Slideshow Manager') ?>
+                </h3>
+            </td>
+            <td class="a-right">
+                <?php echo $this->getAddNewButtonHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<template id="stuntcoders-add-image">
+    <tr>
+        <td><input id="image" name="image[]" value="" type="file" class="input-file" multiple></td>
+    </tr>
+</template>
+<div>
+    <div class="entry-edit">
+        <form id="stuntcoders_slideshow"
+              name="stuntcoders_slideshow"
+              action="<?php echo $this->getUrl('*/*/save', array('id' => $this->getID())); ?>"
+              method="post"
+              enctype="multipart/form-data">
+            <div>
+                <input name="form_key" type="hidden" value="<? echo $this->getFormKey(); ?>">
+            </div>
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend">
+                    <?php echo Mage::helper('adminhtml')->__('Slideshow Information') ?>
+                </h4>
+                <div class="form-buttons"></div>
+            </div>
+            <div class="fieldset" id="stuntcoders_form">
+                <div class="hor-scroll">
+                    <table cellspacing="0" class="form-list">
+                        <tbody>
+                        <tr>
+                            <td class="label">
+                                <label for="code"><?php echo Mage::helper('adminhtml')->__('Code') ?></label>
+                            </td>
+                            <td class="value">
+                                <input id="code"
+                                       name="code"
+                                       value="<?php echo $this->getCodeValue() ?>"
+                                       type="text"
+                                       class="input-text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="name"><?php echo Mage::helper('adminhtml')->__('Name') ?></label>
+                            </td>
+                            <td class="value">
+                                <input id="name"
+                                       name="name"
+                                       value="<?php echo $this->getNameValue() ?>"
+                                       type="text"
+                                       class="input-text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="status"><?php echo Mage::helper('adminhtml')->__('Status') ?></label>
+                            </td>
+                            <td class="value">
+                                <select id="status" name="status">
+                                    <?php if (!$this->getStatusValue()) {?>
+                                        <option value="1">Yes</option>
+                                        <option selected="selected" value="0">No</option>
+                                    <?php
+                                    } else {
+                                        ?>
+                                        <option selected="selected" value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="jsonObject">
+                                    <?php echo Mage::helper('adminhtml')->__('Json Object') ?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <textarea id="jsonObject"
+                                          name="jsonObject"
+                                          cols="30"
+                                          rows="4">
+                                    <?php echo $this->getJsonObject() ?>
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr class="stuntcoders-add-image">
+                            <td class="label">
+                                <label for="image"><?php echo Mage::helper('adminhtml')->__('Images') ?></label>
+                            </td>
+                            <td><div class="imageValue">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="add-more-images">
+                        <?php echo Mage::helper('adminhtml')->__('Add more images') ?>
+                    </button>
+                    <input id="editImages" name="editImages" type="hidden" class="input-text">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend">
+                <?php echo Mage::helper('adminhtml')->__('Slideshow Images') ?>
+            </h4>
+            <div class="form-buttons"></div>
+        </div>
+        <div class="grid">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="data stuntcoders-table-image">
+                    <colgroup>
+                        <col width="4%">
+                        <col width="10%">
+                        <col width="1" class="a-center">
+                        <col width="10%">
+                        <col width="10%">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr class="headings">
+                            <th><span class="nobr"><?php echo Mage::helper('adminhtml')->__('ID') ?></span></th>
+                            <th><span class="nobr"><?php echo Mage::helper('adminhtml')->__('Preview') ?></span></th>
+                            <th><span class="nobr"><?php echo Mage::helper('adminhtml')->__('Image') ?></span></th>
+                            <th><span class="nobr"><?php echo Mage::helper('adminhtml')->__('Status') ?></span></th>
+                            <th class="last">
+                                <span class="nobr"><?php echo Mage::helper('adminhtml')->__('Delete') ?></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->getImages() as $image): ?>
+                            <tr>
+                                <td class="stuntcoders-image-id a-left"><?php echo $image['id'] ?></td>
+                                <td class="a-left">
+                                    <a href="<?php echo Mage::getBaseUrl('media') . $image['image']; ?>" target="_blank">
+                                        <img height="100" src="<?php echo Mage::getBaseUrl('media') . $image['image']; ?>" >
+                                    </a>
+                                </td>
+                                <td class="a-left"><?php echo $image['image'] ?></td>
+                                <td class='a-left stuntcoders-image-enabled'>
+                                    <input type='checkbox'
+                                           class='stuntcoders-status'
+                                           name='enabled'
+                                           value='' <?php echo $image['is_enabled']? ' checked '  : ''; ?> >
+                                </td>
+                                <td class='a-left last stuntcoders-image-delete'>
+                                    <input type='checkbox' class='stuntcoders-delete' name='delete' value=''>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var stuntcoders_slideshow = new varienForm('form');
+    jQuery('.add-more-images').click(function(e){
+        e.preventDefault();
+        jQuery('#stuntcoders_form')
+            .find('.stuntcoders-add-image')
+            .find('.imageValue')
+            .append(jQuery(('#stuntcoders-add-image')).html());
+    });
+
+    jQuery('.stuntcoders-table-image').on('change', '.stuntcoders-status', function(e) {
+        e.preventDefault();
+        if (jQuery(this).val() == 1) {
+            jQuery(this).val('0').text('0');
+            updateInputJson();
+        } else {
+            jQuery(this).val('1').text('1');
+            updateInputJson();
+        }
+    });
+
+    jQuery('.stuntcoders-table-image').on('change', '.stuntcoders-delete', function(e) {
+        e.preventDefault();
+        var obj = JSON.parse(jQuery('#editImages').val());
+        for (var key in obj) {
+            if (jQuery(this).closest('tr').find('.stuntcoders-image-id').text() == obj[key]['id']) {
+                if (obj[key]['delete'] == false) {
+                    obj[key]['delete'] = true;
+                    jQuery('#editImages').val(JSON.stringify(obj));
+                } else {
+                    obj[key]['delete'] = false;
+                    jQuery('#editImages').val(JSON.stringify(obj));
+                }
+            }
+        }
+    });
+
+    jQuery( document ).ready(function() {
+        updateInputJson();
+    });
+
+    function updateInputJson() {
+        var images = [];
+        jQuery('.stuntcoders-table-image tr:has(td)').each(function () {
+            var image = new Image(
+                jQuery(this).find('.stuntcoders-image-id').text(),
+                jQuery(this).find('.stuntcoders-image-enabled .stuntcoders-status').is(':checked'),
+                jQuery(this).find('.stuntcoders-image-delete .stuntcoders-delete').is(':checked')
+            );
+            images.push(image);
+        });
+        jQuery('#editImages').val(JSON.stringify(images));
+    }
+
+    function Image(id, status, del) {
+        this.id = id;
+        this.status = status;
+        this.delete = del;
+    }
+
+</script>
