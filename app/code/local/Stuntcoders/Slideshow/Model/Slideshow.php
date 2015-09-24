@@ -24,6 +24,12 @@ class Stuntcoders_Slideshow_Model_Slideshow extends Mage_Core_Model_Abstract
         }
     }
 
+    public function getImagesCollection()
+    {
+        return Mage::getModel('stuntcoders_slideshow/slideshow_image')->getCollection()
+            ->addSlideshowFilter($this->getId());
+    }
+
     protected function _afterLoad()
     {
         parent::_afterLoad();

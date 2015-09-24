@@ -23,7 +23,6 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
     public function saveAction()
     {
         $postData = $this->getRequest()->getPost();
-
         if (!$postData) {
             $this->_redirect('*/*/index');
             return;
@@ -42,6 +41,25 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
 
             $slideshowModel->save();
             $slideshowModel->addImages($this->_uploadImages());
+
+            if (!empty($postData['edit_images'])) {
+                foreach ($postData['edit_images'] as $id => $data) {
+                    $image = Mage::getModel('stuntcoders_slideshow/slideshow_image')->load($id);
+
+                    if (!$image->getId()) {
+                        continue;
+                    }
+
+                    if (isset($data['delete'])) {
+                        $image->delete();
+                        continue;
+                    }
+
+                    $image->setName($data['name'])
+                        ->setIsEnabled(isset($data['enabled']))
+                        ->save();
+                }
+            }
 
             Mage::getSingleton('adminhtml/session')
                 ->addSuccess(Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));

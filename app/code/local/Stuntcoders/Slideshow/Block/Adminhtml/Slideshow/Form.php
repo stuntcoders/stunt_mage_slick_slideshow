@@ -21,7 +21,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form extends Mage_Adminhtm
             $data = array();
         }
 
-        $fieldset = $form->addFieldset('stuntcoders_form', array(
+        $fieldset = $form->addFieldset('stuntcoders_slideshow_form', array(
             'legend' => Mage::helper('stuntcoders_slideshow')->__('Slideshow Information')
         ));
 
@@ -44,11 +44,24 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form extends Mage_Adminhtm
         $fieldset->addField('config', 'hidden', array('name' => 'config'));
 
         $fieldset->addField('image', 'image', array(
-            'label' => Mage::helper('stuntcoders_slideshow')->__('Images'),
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Add images'),
             'name' => 'images[]',
             'multiple'  => 'multiple',
             'mulitple'  => true,
         ));
+
+        $fieldset = $form->addFieldset('stuntcoders_slideshow_images_form', array(
+            'legend' => Mage::helper('stuntcoders_slideshow')->__('Slideshow Images')
+        ));
+
+        $fieldset->addType('stuntcoders_slideshow_image', 'Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form_Image');
+        if (Mage::registry('stuntcoders_slideshow')) {
+            foreach (Mage::registry('stuntcoders_slideshow')->getImagesCollection() as $image) {
+                $fieldset->addField("slideshow_image_{$image->getId()}", 'stuntcoders_slideshow_image', array(
+                    'image' => $image
+                ));
+            }
+        }
 
         $form->setValues($data);
 
