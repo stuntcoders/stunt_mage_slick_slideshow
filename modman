@@ -1,0 +1,7 @@
+app/code/local/Stuntcoders/Slideshow                                         app/code/local/Stuntcoders/Slideshow
+
+app/design/adminhtml/default/default/layout/stuntcoders/slidehow.xml         app/design/adminhtml/default/default/layout/stuntcoders/slidehow.xml
+app/design/adminhtml/default/default/template/stuntcoders/slidehow           app/design/adminhtml/default/default/template/stuntcoders/slidehow
+app/design/frontend/base/default/template/stuntcoders/slidehow               app/design/frontend/base/default/template/stuntcoders/slidehow
+
+app/etc/modules/*                                                            app/etc/modules/
