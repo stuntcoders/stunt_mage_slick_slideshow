@@ -52,14 +52,14 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
                 }
             }
 
-            Mage::getSingleton('adminhtml/session')->addSuccess(
-                Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));
+            Mage::getSingleton('adminhtml/session')
+                ->addSuccess(Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));
+            $this->_redirect('*/*/add', array('id' => $slideshowModel->getId()));
         } catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('stuntcoders_slideshow')->__($e->getMessage()));
+            Mage::getSingleton('adminhtml/session')
+                ->addError(Mage::helper('stuntcoders_slideshow')->__($e->getMessage()));
+            $this->_redirect('*/*/index');
         }
-
-        $this->_redirect('*/*/index');
     }
 
     public function deleteAction()
