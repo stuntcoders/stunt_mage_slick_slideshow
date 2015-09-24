@@ -26,6 +26,21 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtm
             'index'     => 'id',
         ));
 
+        $this->addColumn('is_enabled', array(
+            'header'  => Mage::helper('stuntcoders_slideshow')->__('Enabled'),
+            'align'   => 'left',
+            'width'   => '100px',
+            'index'   => 'is_enabled',
+            'type'    => 'options',
+            'options' => Mage::getModel('adminhtml/system_config_source_yesno')->toArray()
+        ));
+
+        $this->addColumn('name', array(
+            'header'    => Mage::helper('stuntcoders_slideshow')->__('Name'),
+            'align'     =>'left',
+            'index'     => 'name',
+        ));
+
         $this->addColumn('code', array(
             'header'    => Mage::helper('stuntcoders_slideshow')->__('Code'),
             'align'     =>'left',
@@ -37,13 +52,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtm
             'align'     =>'left',
             'index'     => 'name',
         ));
-
-        $this->addColumn('is_enabled', array(
-            'header'    => Mage::helper('stuntcoders_slideshow')->__('Enabled'),
-            'align'     =>'left',
-            'index'     => 'is_enabled',
-        ));
-
+        
         return parent::_prepareColumns();
     }
 
