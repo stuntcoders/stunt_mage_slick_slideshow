@@ -12,6 +12,18 @@ class Stuntcoders_Slideshow_Model_Slideshow extends Mage_Core_Model_Abstract
         return $this->_getResource()->getIdByCode($code);
     }
 
+    public function addImages($images)
+    {
+        if (empty($images)) {
+            return;
+        }
+
+        $imageModel = Mage::getModel('stuntcoders_slideshow/slideshow_image');
+        foreach ($images as $image) {
+            $imageModel->setId(null)->setImage($image)->setSlideshowId($this->getId())->setIsEnabled(1)->save();
+        }
+    }
+
     protected function _afterLoad()
     {
         parent::_afterLoad();

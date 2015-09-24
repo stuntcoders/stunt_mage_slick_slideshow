@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 ## Unreleased
 ### CHANGED:
 - Rename slideshow config column
+- Fix adding images to slideshow
 
 ## 0.1.0 - 2015-09-24
 ### ADDED:

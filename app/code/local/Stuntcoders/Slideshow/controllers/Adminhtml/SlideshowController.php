@@ -41,16 +41,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
             }
 
             $slideshowModel->save();
-
-            $images = $this->_uploadImages();
-            if (!empty($images)) {
-                foreach ($images as $image) {
-                    Mage::getModel('stuntcoders_slideshow/slideshow_image')
-                        ->setImage($image)->setSlideshowId($slideshowModel->getId())
-                        ->setIsEnabled(1)
-                        ->save();
-                }
-            }
+            $slideshowModel->addImages($this->_uploadImages());
 
             Mage::getSingleton('adminhtml/session')
                 ->addSuccess(Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));
@@ -130,7 +121,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
                 ));
 
                 $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
-                $imageName = $uploader->getCorrectFileName($_FILES['image']['name'][$key]);
+                $imageName = $uploader->getCorrectFileName($_FILES['images']['name'][$key]);
 
                 $uploader->save($path, $imageName);
                 $names[] = $imageName;
