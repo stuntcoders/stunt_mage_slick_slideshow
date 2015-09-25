@@ -1,20 +1,16 @@
 <?php if ($this->isEnabled()): ?>
-    <div class="flexslider">
-      <ul class="slides">
-            <?php
-            foreach ($this->getImages() as $image) {
-                if ($image['is_enabled']) {
-                    echo "<li>";
-                    echo "<img src='{$this->getImagePath($image)}'/>";
-                    echo "</li>";
-                }
-            }
-            ?>
-      </ul>
+    <div class="stuntcoders-slideshow-wrapper">
+        <div class="stuntcoders-slideshow">
+            <?php foreach ($this->getImagesCollection() as $image): ?>
+                <?php if ($image->getIsEnabled()): ?>
+                    <img src="<?php echo $this->getImageUrl($image); ?>" alt="<?php echo $image->getName(); ?>" />
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-    <script type="text/javascript">
+    <script>
     jQuery(window).load(function() {
-        jQuery('.flexslider').flexslider(<?php echo $this->getSliderJson(); ?>);
+        jQuery('.stuntcoders-slideshow').slick();
     });
     </script>
 <?php endif; ?>

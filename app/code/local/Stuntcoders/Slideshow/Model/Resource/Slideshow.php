@@ -21,7 +21,7 @@ class Stuntcoders_Slideshow_Model_Resource_Slideshow extends Mage_Core_Model_Res
         $adapter = $this->_getReadAdapter();
 
         $select = $adapter->select()
-            ->from($this->getTable('stuntcoders_slideshow/slideshow_image'))
+            ->from($this->getTable('stuntcoders_slideshow/slideshow'))
             ->where('code = :code');
 
         $bind = array(':code' => (string) $code);
