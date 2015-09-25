@@ -8,22 +8,8 @@
         </reference>
     </adminhtml_slideshow_index>
     <adminhtml_slideshow_add>
-        <reference name="head">
-            <action method="addJs"><script>stuntcoders/slideshow/jquery-1.11.1.min.js</script></action>
-            <action method="addJs"><script>stuntcoders/slideshow/noconflict.js</script></action>
-
-        </reference>
         <reference name="content">
             <block type="stuntcoders_slideshow/adminhtml_add" name="slideshow.add" template="stuntcoders/slideshow/add.phtml" />
         </reference>
     </adminhtml_slideshow_add>
-    <adminhtml_slideshow_edit>
-        <reference name="head">
-            <action method="addJs"><script>stuntcoders/slideshow/jquery-1.11.1.min.js</script></action>
-            <action method="addJs"><script>stuntcoders/slideshow/noconflict.js</script></action>
-        </reference>
-        <reference name="content">
-            <block type="stuntcoders_slideshow/adminhtml_edit" name="slideshow.edit" template="stuntcoders/slideshow/edit.phtml" />
-        </reference>
-    </adminhtml_slideshow_edit>
 </layout>
