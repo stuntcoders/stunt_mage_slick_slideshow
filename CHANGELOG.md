@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. This projec
 ### ADDED:
 - Implement editing images
 - Slick.js
+- Slideshow options
 
 ### CHANGED:
 - Rename slideshow config column

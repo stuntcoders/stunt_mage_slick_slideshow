@@ -52,7 +52,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtm
             'align'     =>'left',
             'index'     => 'name',
         ));
-        
+
         return parent::_prepareColumns();
     }
 

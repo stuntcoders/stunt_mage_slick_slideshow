@@ -33,7 +33,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
             $slideshowModel->setName($postData['name'])
                 ->setCode($postData['code'])
                 ->setIsEnabled($postData['is_enabled'])
-                ->setConfig(trim($postData['config']));
+                ->setConfig(Mage::helper('stuntcoders_slideshow')->generateConfig($postData));
 
             if ($this->getRequest()->getParam('id')) {
                 $slideshowModel->setId($this->getRequest()->getParam('id'));

@@ -12,6 +12,11 @@ class Stuntcoders_Slideshow_Block_Slideshow extends Mage_Core_Block_Template
         return (bool) $this->getSlideshow() ? $this->getSlideshow()->getIsEnabled() : false;
     }
 
+    public function getConfig()
+    {
+        return $this->getSlideshow() ? $this->getSlideshow()->getConfig() : '';
+    }
+
     public function getImageUrl($image)
     {
         return Mage::helper('stuntcoders_slideshow')->getImageUrl($image->getImage());

@@ -41,13 +41,51 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form extends Mage_Adminhtm
             'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray()
         ));
 
-        $fieldset->addField('config', 'hidden', array('name' => 'config'));
-
         $fieldset->addField('image', 'image', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Add images'),
             'name' => 'images[]',
             'multiple'  => 'multiple',
             'mulitple'  => true,
+        ));
+
+        $fieldset = $form->addFieldset('stuntcoders_slideshow_options_form', array(
+            'legend' => Mage::helper('stuntcoders_slideshow')->__('Slideshow Options')
+        ));
+
+        $configData = isset($data['config']) ? json_decode($data['config'], true) : array();
+        $data['autoplay'] = isset($configData['autoplay']) && $configData['autoplay'] ? 1 : 0;
+        $data['direction'] = isset($configData['vertical']) && $configData['vertical'] ? 1 : 0;
+        $data['animation'] = isset($configData['fade']) && $configData['fade'] ? 1 : 0;
+        $data['dots'] = isset($configData['dots']) && $configData['dots'] ? 1 : 0;
+
+        $fieldset->addField('autoplay', 'select', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Auto play'),
+            'name' => 'autoplay',
+            'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray()
+        ));
+
+        $fieldset->addField('direction', 'select', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Slideshow direction'),
+            'name' => 'direction',
+            'values' => array(
+                array('value' => 0, 'label'=>Mage::helper('adminhtml')->__('Horizontal')),
+                array('value' => 1, 'label'=>Mage::helper('adminhtml')->__('Vertical')),
+            )
+        ));
+
+        $fieldset->addField('animation', 'select', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Animation type'),
+            'name' => 'animation',
+            'values' => array(
+                array('value' => 0, 'label'=>Mage::helper('adminhtml')->__('Slide')),
+                array('value' => 1, 'label'=>Mage::helper('adminhtml')->__('Fade')),
+            )
+        ));
+
+        $fieldset->addField('dots', 'select', array(
+            'label' => Mage::helper('stuntcoders_slideshow')->__('Show dots'),
+            'name' => 'dots',
+            'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray()
         ));
 
         $fieldset = $form->addFieldset('stuntcoders_slideshow_images_form', array(
