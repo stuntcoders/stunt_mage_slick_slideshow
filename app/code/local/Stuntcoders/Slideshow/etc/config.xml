@@ -41,6 +41,15 @@
             </stuntcoders_slideshow_setup>
         </resources>
     </global>
+    <frontend>
+        <layout>
+            <updates>
+                <stuntcoders_slideshow>
+                    <file>stuntcoders/slideshow.xml</file>
+                </stuntcoders_slideshow>
+            </updates>
+        </layout>
+    </frontend>
     <adminhtml>
         <acl>
             <resources>
