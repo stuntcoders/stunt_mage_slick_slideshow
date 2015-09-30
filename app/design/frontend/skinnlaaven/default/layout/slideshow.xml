@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<layout version="0.1.0">
-    <stuntcoders_slideshow>
-        <reference name="head">
-            <action method="addJs"><script>stuntcoders/slideshow/jquery.flexslider-min.js</script></action>
-        </reference>
-    </stuntcoders_slideshow>
-</layout>

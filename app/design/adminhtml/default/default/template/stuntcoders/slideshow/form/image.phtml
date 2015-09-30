@@ -1,0 +1,15 @@
+<?php $image = $this->getImage(); ?>
+<div class="left">
+    <img src="<?php echo Mage::helper('stuntcoders_slideshow')->getImageUrl($image->getImage()); ?>" width="200" alt=""/>
+</div>
+<div class="right" style="padding: 1em;">
+    <input type="text" class="input-text" value="<?php echo $image->getName(); ?>" name="edit_images[<?php echo $image->getId() ?>][name]" placeholder="<?php echo $this->__('Name') ?>" />
+
+    <div style="margin-top: 1em;">
+        <label for="remove_image<?php echo $image->getId() ?>"><?php echo $this->__('Remove'); ?></label>
+        <input type="checkbox" id="remove_image<?php echo $image->getId() ?>" name="edit_images[<?php echo $image->getId() ?>][delete]" />
+
+        <label for="remove_image<?php echo $image->getId() ?>" style="margin-left: 1em;"><?php echo $this->__('Enabled'); ?></label>
+        <input type="checkbox" id="remove_image<?php echo $image->getId() ?>" name="edit_images[<?php echo $image->getId() ?>][enabled]" <?php echo $image->getIsEnabled()? 'checked': ''; ?> />
+    </div>
+</div>

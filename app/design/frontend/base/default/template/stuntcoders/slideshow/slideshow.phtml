@@ -1,0 +1,16 @@
+<?php if ($this->isEnabled()): ?>
+    <div class="stuntcoders-slideshow-wrapper">
+        <div class="stuntcoders-slideshow">
+            <?php foreach ($this->getImagesCollection() as $image): ?>
+                <?php if ($image->getIsEnabled()): ?>
+                    <img src="<?php echo $this->getImageUrl($image); ?>" alt="<?php echo $image->getName(); ?>" />
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <script>
+    jQuery(window).load(function() {
+        jQuery('.stuntcoders-slideshow').slick(<?php echo $this->getConfig(); ?>);
+    });
+    </script>
+<?php endif; ?>
