@@ -6,7 +6,7 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
     {
         $form = new Varien_Data_Form(
             array(
-                'id' => 'stuntcoders_slideshow',
+                'id' => 'edit_form',
                 'name' => 'stuntcoders_slideshow',
                 'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
                 'method' => 'post',
