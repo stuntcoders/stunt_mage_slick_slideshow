@@ -1,6 +1,6 @@
 <?php
 
-class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Form_Image extends Varien_Data_Form_Element_Abstract
+class Stuntcoders_Slideshow_Block_Adminhtml_New_Form_Image extends Varien_Data_Form_Element_Abstract
 {
     public function getElementHtml()
     {
