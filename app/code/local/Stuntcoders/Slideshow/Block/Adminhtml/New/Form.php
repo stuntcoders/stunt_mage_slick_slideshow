@@ -4,20 +4,17 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
 {
     protected function _prepareForm()
     {
-        $form = new Varien_Data_Form(
-            array(
-                'id' => 'edit_form',
-                'name' => 'stuntcoders_slideshow',
-                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
-                'method' => 'post',
-                'enctype' => 'multipart/form-data'
-            )
-        );
+        $form = new Varien_Data_Form(array(
+            'id' => 'edit_form',
+            'name' => 'stuntcoders_slideshow',
+            'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
+            'method' => 'post',
+            'enctype' => 'multipart/form-data'
+        ));
 
+        $data = array();
         if (Mage::registry('stuntcoders_slideshow')) {
             $data = Mage::registry('stuntcoders_slideshow')->getData();
-        } else {
-            $data = array();
         }
 
         $fieldset = $form->addFieldset('stuntcoders_slideshow_form', array(
@@ -52,10 +49,10 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
         ));
 
         $configData = isset($data['config']) ? json_decode($data['config'], true) : array();
-        $data['autoplay'] = isset($configData['autoplay']) && $configData['autoplay'] ? 1 : 0;
-        $data['direction'] = isset($configData['vertical']) && $configData['vertical'] ? 1 : 0;
-        $data['animation'] = isset($configData['fade']) && $configData['fade'] ? 1 : 0;
-        $data['dots'] = isset($configData['dots']) && $configData['dots'] ? 1 : 0;
+        $data['autoplay'] = isset($configData['autoplay']) && $configData['autoplay'];
+        $data['direction'] = isset($configData['vertical']) && $configData['vertical'];
+        $data['animation'] = isset($configData['fade']) && $configData['fade'];
+        $data['dots'] = isset($configData['dots']) && $configData['dots'];
 
         $fieldset->addField('autoplay', 'select', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Auto play'),
