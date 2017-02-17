@@ -24,11 +24,13 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
         $fieldset->addField('name', 'text', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Name'),
             'name' => 'name',
+            'required' => true,
         ));
 
         $fieldset->addField('code', 'text', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Code'),
             'name' => 'code',
+            'required' => true,
         ));
 
         $fieldset->addField('is_enabled', 'select', array(
@@ -40,8 +42,6 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
         $fieldset->addField('image', 'image', array(
             'label' => Mage::helper('stuntcoders_slideshow')->__('Add images'),
             'name' => 'images[]',
-            'multiple'  => 'multiple',
-            'mulitple'  => true,
         ));
 
         $fieldset = $form->addFieldset('stuntcoders_slideshow_options_form', array(
