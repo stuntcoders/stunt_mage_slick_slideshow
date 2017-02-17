@@ -2,14 +2,12 @@
 <layout version="0.1.0">
     <adminhtml_slideshow_index>
         <reference name="content">
-            <block type="stuntcoders_slideshow/adminhtml_slideshow" name="slideshow.index">
-                <block type="stuntcoders_slideshow/adminhtml_slideshow_grid" name="slideshow.grid" />
-            </block>
+            <block type="stuntcoders_slideshow/adminhtml_index" name="slideshow.index"/>
         </reference>
     </adminhtml_slideshow_index>
-    <adminhtml_slideshow_add>
+    <adminhtml_slideshow_new>
         <reference name="content">
-            <block type="stuntcoders_slideshow/adminhtml_add" name="slideshow.add" template="stuntcoders/slideshow/add.phtml" />
+            <block type="stuntcoders_slideshow/adminhtml_new" name="slideshow.new"/>
         </reference>
-    </adminhtml_slideshow_add>
+    </adminhtml_slideshow_new>
 </layout>

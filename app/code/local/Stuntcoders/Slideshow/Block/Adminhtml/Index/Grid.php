@@ -1,6 +1,6 @@
 <?php
 
-class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Stuntcoders_Slideshow_Block_Adminhtml_Index_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct()
     {
@@ -74,5 +74,4 @@ class Stuntcoders_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtm
     {
         return $this->getUrl('*/*/add', array('id' => $row->getId()));
     }
-
 }

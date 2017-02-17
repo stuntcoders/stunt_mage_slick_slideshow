@@ -8,7 +8,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
         $this->renderLayout();
     }
 
-    public function addAction()
+    public function newAction()
     {
         if ($this->getRequest()->getParam('id')) {
             Mage::register('stuntcoders_slideshow',
@@ -22,17 +22,14 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
 
     public function saveAction()
     {
-        $postData = $this->getRequest()->getPost();
-        if (!$postData) {
-            $this->_redirect('*/*/index');
-            return;
-        }
-
         try {
+            $postData = $this->getRequest()->getPost();
+            if (!$postData) {
+                Mage::throwException('Bad request');
+            }
+
             $slideshowModel = Mage::getModel('stuntcoders_slideshow/slideshow');
-            $slideshowModel->setName($postData['name'])
-                ->setCode($postData['code'])
-                ->setIsEnabled($postData['is_enabled'])
+            $slideshowModel->addData($postData)
                 ->setConfig(Mage::helper('stuntcoders_slideshow')->generateConfig($postData));
 
             if ($this->getRequest()->getParam('id')) {
@@ -40,6 +37,7 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
             }
 
             $slideshowModel->save();
+
             $slideshowModel->addImages($this->_uploadImages());
 
             if (!empty($postData['edit_images'])) {
@@ -61,33 +59,28 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
                 }
             }
 
-            Mage::getSingleton('adminhtml/session')
-                ->addSuccess(Mage::helper('stuntcoders_slideshow')->__('Slideshow successfully saved'));
-            $this->_redirect('*/*/add', array('id' => $slideshowModel->getId()));
+            $this->_getSession()->addSuccess($this->__('Slideshow saved'));
+            $this->_redirect('*/*/new', array('id' => $slideshowModel->getId()));
         } catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')
-                ->addError(Mage::helper('stuntcoders_slideshow')->__($e->getMessage()));
+            $this->_getSession()->addError($this->__($e->getMessage()));
             $this->_redirect('*/*/index');
         }
     }
 
     public function deleteAction()
     {
-        if (!$this->getRequest()->getParam('id')) {
-            $this->_redirect('*/*/index');
-            return;
-        }
-
         try {
+            if (!$this->getRequest()->getParam('id')) {
+                Mage::throwException('Bad request');
+            }
+
             Mage::getModel('stuntcoders_slideshow/slideshow')
                 ->load($this->getRequest()->getParam('id'))
                 ->delete();
 
-            Mage::getSingleton('adminhtml/session')->addSuccess(
-                Mage::helper('stuntcoders_simplemenu')->__('Simple Menu successfully deleted'));
+            $this->_getSession()->addSuccess($this->__('Slideshow deleted'));
         } catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('stuntcoders_simplemenu')->__('Simple Menu could not be deleted'));
+            $this->_getSession()->addError($this->__($e->getMessage()));
         }
 
         $this->_redirect('*/*/index');
@@ -95,32 +88,36 @@ class Stuntcoders_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml
 
     public function massDeleteAction()
     {
-        $idList = $this->getRequest()->getParam('ids');
-        if (!is_array($idList)) {
-            Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('stuntcoders_slideshow')->__('Please select banners(s)')
-            );
-        } else {
-            try {
-                foreach ($idList as $itemId) {
-                    Mage::getModel('stuntcoders_slideshow/slideshow')
-                        ->setIsMassDelete(true)
-                        ->load($itemId)
-                        ->delete();
-                }
-                Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('stuntcoders_slideshow')->__(
-                        'Total of %d record(s) were successfully deleted', count($idList)
-                    )
-                );
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        try {
+            $idList = $this->getRequest()->getParam('ids');
+            if (!is_array($idList)) {
+                Mage::throwException('Please select slideshow(s)');
             }
+
+            foreach ($idList as $itemId) {
+                Mage::getModel('stuntcoders_slideshow/slideshow')
+                    ->setIsMassDelete(true)
+                    ->load($itemId)
+                    ->delete();
+            }
+
+            $this->_getSession()->addSuccess($this->__(
+                'Total of %d record(s) were successfully deleted',
+                count($idList)
+            ));
+        } catch (Exception $e) {
+            $this->_getSession()->addError($this->__($e->getMessage()));
         }
+
         $this->_redirect('*/*/index');
     }
 
-    private function _uploadImages()
+    protected function _getHelper()
+    {
+        return Mage::helper('stuntcoders_slideshow');
+    }
+
+    protected function _uploadImages()
     {
         if (!isset($_FILES['images']['name'])) {
             return false;
