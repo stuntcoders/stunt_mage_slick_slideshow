@@ -1,10 +1,9 @@
-app/code/local/Stuntcoders/Slideshow                                          app/code/local/Stuntcoders/Slideshow
+app/code/local/Stuntcoders/*                                                  app/code/local/Stuntcoders/
 
 app/design/adminhtml/default/default/layout/stuntcoders/slideshow.xml         app/design/adminhtml/default/default/layout/stuntcoders/slideshow.xml
 app/design/adminhtml/default/default/template/stuntcoders/slideshow           app/design/adminhtml/default/default/template/stuntcoders/slideshow
 app/design/frontend/base/default/layout/stuntcoders/slideshow.xml             app/design/frontend/base/default/layout/stuntcoders/slideshow.xml
 app/design/frontend/base/default/template/stuntcoders/slideshow               app/design/frontend/base/default/template/stuntcoders/slideshow
-js/stuntcoders/slideshow                                                      js/stuntcoders/slideshow
 skin/frontend/base/default/stuntcoders/slideshow                              skin/frontend/base/default/stuntcoders/slideshow
 
 app/etc/modules/*                                                             app/etc/modules/
