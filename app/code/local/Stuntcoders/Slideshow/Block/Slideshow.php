@@ -51,7 +51,9 @@ class Stuntcoders_Slideshow_Block_Slideshow extends Mage_Core_Block_Template
         if (!$this->getTemplate()) {
             $this->setTemplate('stuntcoders/slideshow/slideshow.phtml');
         }
+
         $html = $this->renderView();
+
         return $html;
     }
 }
