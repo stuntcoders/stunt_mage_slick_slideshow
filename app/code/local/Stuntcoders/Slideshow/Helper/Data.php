@@ -32,10 +32,6 @@ class Stuntcoders_Slideshow_Helper_Data extends Mage_Core_Helper_Abstract
             $config['fade'] = true;
         }
 
-        if ($data['direction']) {
-            $config['vertical'] = true;
-        }
-
         if ($data['dots']) {
             $config['dots'] = true;
         }

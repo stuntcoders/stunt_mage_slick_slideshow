@@ -50,7 +50,6 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
 
         $configData = isset($data['config']) ? json_decode($data['config'], true) : array();
         $data['autoplay'] = isset($configData['autoplay']) && $configData['autoplay'];
-        $data['direction'] = isset($configData['vertical']) && $configData['vertical'];
         $data['animation'] = isset($configData['fade']) && $configData['fade'];
         $data['dots'] = isset($configData['dots']) && $configData['dots'];
 
@@ -58,15 +57,6 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
             'label' => Mage::helper('stuntcoders_slideshow')->__('Auto play'),
             'name' => 'autoplay',
             'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray()
-        ));
-
-        $fieldset->addField('direction', 'select', array(
-            'label' => Mage::helper('stuntcoders_slideshow')->__('Slideshow direction'),
-            'name' => 'direction',
-            'values' => array(
-                array('value' => 0, 'label' => Mage::helper('adminhtml')->__('Horizontal')),
-                array('value' => 1, 'label' => Mage::helper('adminhtml')->__('Vertical')),
-            )
         ));
 
         $fieldset->addField('animation', 'select', array(

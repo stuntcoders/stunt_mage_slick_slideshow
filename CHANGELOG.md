@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Update Slick
 
+### Removed
+- Directions slick options from admin form
+
 ## [0.3.1] - 2017-02-17
 ### Changed
 - Update Grid Adminhtml Block row action call
