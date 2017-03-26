@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <slideshow translate="title" module="stuntcoders_slideshow">
+                                <title>Slideshow</title>
+                            </slideshow>
+                        </children>
+                    </cms>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <cms>
+            <children>
+                <slideshow translate="title" module="stuntcoders_slideshow">
+                    <title>Slideshow</title>
+                    <sort_order>0</sort_order>
+                    <action>adminhtml/slideshow/index</action>
+                </slideshow>
+            </children>
+        </cms>
+    </menu>
+</config>
