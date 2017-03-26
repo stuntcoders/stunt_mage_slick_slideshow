@@ -1,30 +1,37 @@
 <?php
+/** @var Mage_Core_Model_Resource_Setup $this */
 
-$installer = $this;
+$this->startSetup();
+$table = $this->getConnection()
+    ->newTable($this->getTable('stuntcoders_slideshow/slideshow'))
+    ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'identity' => true,
+        'unsigned' => true,
+        'nullable' => false,
+        'primary' => true,
+    ))->addColumn('code', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array())
+    ->addColumn('name', Varien_Db_Ddl_Table::TYPE_TEXT, null, array())
+    ->addColumn('config', Varien_Db_Ddl_Table::TYPE_TEXT, null, array())
+    ->addColumn('is_enabled', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null);
 
-$installer->startSetup();
+$table->addIndex(
+    $this->getIdxName('stuntcoders_slideshow/slideshow', array('code'), Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE),
+    array('code'),
+    Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
+);
 
-$installer->run("
-DROP TABLE IF EXISTS `{$this->getTable('stuntcoders_slideshow/slideshow')}`;
-CREATE TABLE `{$this->getTable('stuntcoders_slideshow/slideshow')}` (
-    `id` smallint(6) NOT NULL AUTO_INCREMENT,
-    `code` varchar(255) NOT NULL,
-    `name` varchar(255) NOT NULL,
-    `is_enabled` smallint(6) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `UNIQ_KEY_STUNTCODERS_SLIDESHOW_CODE` (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Slideshow instance' ;
-");
+$this->getConnection()->createTable($table);
 
-$installer->run("
-DROP TABLE IF EXISTS `{$this->getTable('stuntcoders_slideshow/slideshow_image')}`;
-CREATE TABLE `{$this->getTable('stuntcoders_slideshow/slideshow_image')}` (
-    `id` smallint(6) NOT NULL AUTO_INCREMENT,
-    `slideshow_id` smallint(6) NOT NULL,
-    `image` varchar(255) NOT NULL,
-    `is_enabled` smallint(6) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Slideshow image instance' ;
-");
+$table = $this->getConnection()
+    ->newTable($this->getTable('stuntcoders_slideshow/slideshow_image'))
+    ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'identity' => true,
+        'unsigned' => true,
+        'nullable' => false,
+        'primary' => true,
+    ))->addColumn('slideshow_id', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array())
+    ->addColumn('image', Varien_Db_Ddl_Table::TYPE_TEXT, null, array())
+    ->addColumn('is_enabled', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null);
 
-$installer->endSetup();
+$this->getConnection()->createTable($table);
+$this->endSetup();
