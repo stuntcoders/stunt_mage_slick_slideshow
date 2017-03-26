@@ -1,37 +1,40 @@
 # Change Log
-All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented in this file.
 
-## Unrleased
-### CHANGED:
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [Unreleased]
+### Changed
 - Update Slick
 
-## 0.3.1 - 2017-02-17
-### CHANGED:
+## [0.3.1] - 2017-02-17
+### Changed
 - Update Grid Adminhtml Block row action call
 
-## 0.3.0 - 2017-02-17
-### ADDED:
+## [0.3.0] - 2017-02-17
+### Added
 - Support for single slideshow delete
 - Back button
 
-### CHANGED:
+### Changed
 - Refactor module blocks
 - Fixed alert messages
 
-### REMOVED:
+### Removed
 - Unneeded templates
 
-## 0.2.0 - 2015-09-30
-### ADDED:
+## [0.2.0] - 2015-09-30
+### Added
 - Implement editing images
 - Slick.js
 - Slideshow options
 
-### CHANGED:
+### Changed
 - Rename slideshow config column
 - Fix adding images to slideshow
 
-## 0.1.0 - 2015-09-24
-### ADDED:
+## [0.1.0] - 2015-09-24
+### Added
 - Changelog file
 - Modman file
