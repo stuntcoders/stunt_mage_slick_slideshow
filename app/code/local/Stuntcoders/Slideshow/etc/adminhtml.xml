@@ -20,7 +20,7 @@
             <children>
                 <slideshow translate="title" module="stuntcoders_slideshow">
                     <title>Slideshow</title>
-                    <sort_order>0</sort_order>
+                    <sort_order>100</sort_order>
                     <action>adminhtml/slideshow/index</action>
                 </slideshow>
             </children>
