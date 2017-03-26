@@ -64,8 +64,8 @@ class Stuntcoders_Slideshow_Block_Adminhtml_New_Form extends Mage_Adminhtml_Bloc
             'label' => Mage::helper('stuntcoders_slideshow')->__('Slideshow direction'),
             'name' => 'direction',
             'values' => array(
-                array('value' => 0, 'label'=>Mage::helper('adminhtml')->__('Horizontal')),
-                array('value' => 1, 'label'=>Mage::helper('adminhtml')->__('Vertical')),
+                array('value' => 0, 'label' => Mage::helper('adminhtml')->__('Horizontal')),
+                array('value' => 1, 'label' => Mage::helper('adminhtml')->__('Vertical')),
             )
         ));
 
